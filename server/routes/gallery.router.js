@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
+// const galleryItems = require('../modules/gallery.data');
 const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
@@ -8,20 +8,20 @@ const pool = require('../modules/pool');
 // PUT Route
 router.put('/like/:id', (req, res) => {
     console.log(req.params, req.body);
-   const queryText = `
+    const queryText = `
    UPDATE "user-images"
    SET "likes" = $2
    WHERE "id" = $1;   
    `
-   pool.query(queryText, [req.params.id, (req.body.likes += 1)])
-    .then(() =>{
-        console.log('likes updated');
-        res.sendStatus(200)
-    })
-    .catch((err) =>{
-        console.log('like failed', err);
-        res.sendStatus(500)
-    })
+    pool.query(queryText, [req.params.id, (req.body.likes += 1)])
+        .then(() => {
+            console.log('likes updated');
+            res.sendStatus(200)
+        })
+        .catch((err) => {
+            console.log('like failed', err);
+            res.sendStatus(500)
+        })
 }); // END PUT Route
 
 // GET Route
@@ -38,5 +38,22 @@ router.get('/', (req, res) => {
         })
 
 }); // END GET Route
+
+router.delete('/:id', (req, res) => {
+
+    const sqlQuery = `
+        DELETE FROM "user-images"
+        WHERE "id" = $1
+    `
+
+    pool.query(sqlQuery, [req.params.id])
+        .then(() => {
+            console.log('delete success')
+            res.sendStatus(200)
+        }).catch((err) => {
+            console.log('delete request failed');
+            res.sendStatus(500)
+        })
+})
 
 module.exports = router;
