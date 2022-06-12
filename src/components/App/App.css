@@ -13,3 +13,33 @@
   font-size: 1.5em;
 }
 
+img{
+  width: 175px;
+  margin-bottom: 10px;
+}
+.img-card{
+  background-color: darkblue;
+  margin-bottom: 10px;
+  border: 2px outset black;
+  display: flex;
+  align-items: center;
+  height: 175px;
+  align-content: flex-start;
+  flex-direction: column;
+}
+.img-desc{
+  
+  margin: auto;
+  background-color: lightgoldenrodyellow;
+  border-top: inset 1px lightgray;
+  border-bottom: inset 1px lightgray;
+}
+.gallery-item{
+  background-color: lightblue;
+  margin:20px;
+  border: solid 2px darkgray;
+  width: 175px;
+  height: 250px;
+  overflow-wrap: break-word;
+}
+
