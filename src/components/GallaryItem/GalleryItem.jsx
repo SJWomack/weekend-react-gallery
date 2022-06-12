@@ -9,7 +9,7 @@ function GalleryItem({ image, onLike }) {
         <div className="gallery-item">
             <div className="img-card" onClick={toggleDescription}>
                 {description ?
-                    <p>{image.description}</p> :
+                    <p className='img-desc'>{image.description}</p> :
                     <img src={image.path}></img>
                 }
             </div>
