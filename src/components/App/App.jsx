@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.css';
 import { useState, useEffect } from 'react';
-import GalleryList from '../GalleryList'
+import GalleryList from '../GalleryList/GalleryList';
+import axios from 'axios';
 
-const [imageList, setImageList] = useState([])
+
+
+function App() {
+
+  const [imageList, setImageList] = useState([])
 
 useEffect(() => {
   fetchImages();
@@ -19,14 +24,14 @@ function fetchImages() {
     })
 }
 
-function App() {
+
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
       <p>Gallery goes here</p>
-
+        <GalleryList images={imageList} />
     </div>
   );
 }
