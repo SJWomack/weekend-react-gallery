@@ -10,10 +10,10 @@ function GalleryItem({ image, onLike }) {
             <div className="img-card" onClick={toggleDescription}>
                 {description ?
                     <p className='img-desc'>{image.description}</p> :
-                    <img src={image.path}></img>
+                    <img src={image.url}></img>
                 }
             </div>
-            <button className="like-btn" onClick={() => onLike(image.id)}>Like</button>
+            <button className="like-btn" onClick={() => onLike(image.id, image.likes)}>Like</button>
             <p>{image.likes} people like this!</p>
         </div>
     )

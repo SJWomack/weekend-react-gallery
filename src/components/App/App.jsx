@@ -24,8 +24,9 @@ function fetchImages() {
     })
 }
 
-function handleLikePut(id){
-  axios.put(`/gallery/like/${id}`)
+function handleLikePut(id,likes){
+  console.log(id, likes);
+  axios.put(`/gallery/like/${id}`,{likes:likes})
   .then(() =>{
     console.log('like success');
     fetchImages();
