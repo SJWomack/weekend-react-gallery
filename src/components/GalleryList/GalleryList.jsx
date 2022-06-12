@@ -1,12 +1,18 @@
 import GalleryItem from "../GallaryItem/GalleryItem";
 
-function GalleryList({images, handleLike}){
-    function onLike(img){
-        handleLike(img)
+function GalleryList({ images, handleLike, handleDelete }) {
+    function onLike(id, likes) {
+        handleLike(id,likes);
     }
-    return(
-        images.map(image =>
-            <GalleryItem key={image.id} image={image} onLike={onLike}/>)
+    function onDel(id){
+        handleDelete(id);
+    }
+    return (
+        <div id="gallery">
+        {images.map(image =>
+            <GalleryItem key={image.id} image={image} onDel={onDel} onLike={onLike} />)
+            }
+        </div>
     )
 }
 

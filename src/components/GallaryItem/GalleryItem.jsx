@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function GalleryItem({ image, onLike }) {
+function GalleryItem({ image, onLike, onDel }) {
     const [description, setDescription] = useState(false)
     function toggleDescription(){
         setDescription(!description);
@@ -10,10 +10,11 @@ function GalleryItem({ image, onLike }) {
             <div className="img-card" onClick={toggleDescription}>
                 {description ?
                     <p className='img-desc'>{image.description}</p> :
-                    <img src={image.path}></img>
+                    <img src={image.url}></img>
                 }
             </div>
-            <button className="like-btn" onClick={() => onLike(image.id)}>Like</button>
+            <button className="like-btn" onClick={() => onLike(image.id, image.likes)}>Like</button>
+            <button className='delete-btn' onClick={() => onDel(image.id)}>Delete</button>
             <p>{image.likes} people like this!</p>
         </div>
     )

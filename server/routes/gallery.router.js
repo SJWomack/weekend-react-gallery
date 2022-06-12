@@ -1,25 +1,79 @@
 const express = require('express');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
-// const pool = require('../modules/pool');
+// const galleryItems = require('../modules/gallery.data');
+const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
 // PUT Route
 router.put('/like/:id', (req, res) => {
-    console.log(req.params);
-    const galleryId = req.params.id;
-    for(const galleryItem of galleryItems) {
-        if(galleryItem.id == galleryId) {
-            galleryItem.likes += 1;
-        }
-    }
-    res.sendStatus(200);
+    console.log(req.params, req.body);
+    const queryText = `
+   UPDATE "user-images"
+   SET "likes" = $2
+   WHERE "id" = $1;   
+   `
+    pool.query(queryText, [req.params.id, (req.body.likes += 1)])
+        .then(() => {
+            console.log('likes updated');
+            res.sendStatus(200)
+        })
+        .catch((err) => {
+            console.log('like failed', err);
+            res.sendStatus(500)
+        })
 }); // END PUT Route
 
 // GET Route
 router.get('/', (req, res) => {
-    res.send(galleryItems);
+    const queryText = `SELECT * FROM "user-images"`
+    pool.query(queryText)
+        .then((results) => {
+            console.log('get success')
+            res.send(results.rows);
+        })
+        .catch((err) => {
+            console.log('get failed', err)
+            res.sendStatus(500);
+        })
+
 }); // END GET Route
+
+router.delete('/:id', (req, res) => {
+
+    const sqlQuery = `
+        DELETE FROM "user-images"
+        WHERE "id" = $1
+    `
+
+    pool.query(sqlQuery, [req.params.id])
+        .then(() => {
+            console.log('delete success')
+            res.sendStatus(200)
+        }).catch((err) => {
+            console.log('delete request failed');
+            res.sendStatus(500)
+        })
+})
+
+router.post('/', (req, res)=>{
+    if (req.body.url === '' || req.body.description === ''){
+        res.send('please input all fields', 501);
+        return false;
+    }
+    const queryText = `
+        INSERT INTO "user-images" ("url", "description")
+        VALUES ($1, $2)`
+    pool.query(queryText, [req.body.url, req.body.description])
+        .then(() =>{
+            console.log('list post success');
+            res.sendStatus(201);
+        })
+        .catch(err =>{
+            console.log('err in post to list', err);
+            res.sendStatus(500);
+        })
+})
+
 
 module.exports = router;

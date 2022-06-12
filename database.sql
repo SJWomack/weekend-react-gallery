@@ -4,3 +4,6 @@ CREATE TABLE "user-images" (
 "description" VARCHAR NOT NULL,
 "likes" INTEGER DEFAULT(0)
 );
+
+INSERT INTO "user-images" ( "url","description", "likes")
+VALUES ('images/goat_small.jpg','Photo of a goat taken at Glacier National Park.' , 300)
