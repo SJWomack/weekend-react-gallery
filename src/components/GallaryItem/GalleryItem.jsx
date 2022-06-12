@@ -1,12 +1,19 @@
+import { useState } from 'react'
 
-function GalleryItem({image, onLike}){
-    
+function GalleryItem({ image, onLike }) {
+    const [description, setDescription] = useState(false)
+    function toggleDescription(){
+        setDescription(!description);
+    }
     return (
         <div className="gallery-item">
-            <div className="img-card">
-            <img src={image.path}></img>
+            <div className="img-card" onClick={toggleDescription}>
+                {description ?
+                    <p>{image.description}</p> :
+                    <img src={image.path}></img>
+                }
             </div>
-            <button className="like-btn" onClick={()=> onLike(image.id)}>Like</button>
+            <button className="like-btn" onClick={() => onLike(image.id)}>Like</button>
             <p>{image.likes} people like this!</p>
         </div>
     )
