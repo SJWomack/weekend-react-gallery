@@ -11,7 +11,8 @@ function ImageForm({ addImg }) {
 
         evt.preventDefault();
         addImg(newImg)
-        evt.target.reset();
+        setDescription('');
+        setInputUrl('');
     }
 
     return (
@@ -19,7 +20,7 @@ function ImageForm({ addImg }) {
             <div>
                 <label>Image Source</label>
                 <input
-                    val={inputUrl}
+                    value={inputUrl}
                     onChange={(event) => {
                         setInputUrl(event.target.value)
                         console.log(inputUrl)
@@ -30,10 +31,10 @@ function ImageForm({ addImg }) {
             <div>
                 <label>Image Description</label>
                 <input
-                    val={description}
+                    value={description}
                     onChange={(event) => {
                         setDescription(event.target.value)
-                        console.log(inputUrl)
+                        console.log(description)
                     }}
                     type='text'
                     required />
