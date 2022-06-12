@@ -1,0 +1,6 @@
+CREATE TABLE "user-images" (
+"id" SERIAL PRIMARY KEY,
+"url" VARCHAR NOT NULL,
+"description" VARCHAR NOT NULL,
+"likes" INTEGER DEFAULT(0)
+);
