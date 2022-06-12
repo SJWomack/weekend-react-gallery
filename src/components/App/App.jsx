@@ -24,6 +24,17 @@ function fetchImages() {
     })
 }
 
+function handleLikePut(id){
+  axios.put(`/gallery/like/${id}`)
+  .then(() =>{
+    console.log('like success');
+    fetchImages();
+  })
+  .catch((err) =>{
+    console.log('like failed', err);
+  })
+}
+
 
   return (
     <div className="App">
@@ -31,7 +42,7 @@ function fetchImages() {
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
       <p>Gallery goes here</p>
-        <GalleryList images={imageList} />
+        <GalleryList images={imageList} handleLike={handleLikePut} />
     </div>
   );
 }

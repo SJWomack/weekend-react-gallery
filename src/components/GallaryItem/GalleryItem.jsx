@@ -1,11 +1,12 @@
 
-function GalleryItem({image}){
+function GalleryItem({image, onLike}){
+    
     return (
         <div className="gallery-item">
             <div className="img-card">
             <img src={image.path}></img>
             </div>
-            <button className="like-btn">Like</button>
+            <button className="like-btn" onClick={()=> onLike(image.id)}>Like</button>
             <p>{image.likes} people like this!</p>
         </div>
     )
