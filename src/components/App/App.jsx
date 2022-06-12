@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { useState, useEffect } from 'react';
 import GalleryList from '../GalleryList/GalleryList';
+import ImageForm from '../ImageForm/ImageForm';
 import axios from 'axios';
 
 
@@ -40,11 +41,23 @@ function App() {
     console.log('in del', id);
 
     axios.delete('/gallery/' + id)
-      .then(() => {
+      .then((response) => {
+        
 
         fetchImages();
       }).catch((err) => {
         console.log('Delete request failed', err);
+      })
+  }
+
+  function handleNewImage(newImg) {
+    axios.post(`/gallery`, newImg)
+      .then((response) => {
+        console.log('post success', response)
+        fetchImages();
+      })
+      .catch((err) => {
+        console.log('post failed', err)
       })
   }
 
@@ -54,7 +67,7 @@ function App() {
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
-      <p>Gallery goes here</p>
+      <ImageForm addImg={handleNewImage} />
       <GalleryList images={imageList} handleDelete={handleDelGalleryItem} handleLike={handleLikePut} />
     </div>
   );

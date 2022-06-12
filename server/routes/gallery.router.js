@@ -56,4 +56,24 @@ router.delete('/:id', (req, res) => {
         })
 })
 
+router.post('/', (req, res)=>{
+    if (req.body.url === '' || req.body.description === ''){
+        res.send('please input all fields', 501);
+        return false;
+    }
+    const queryText = `
+        INSERT INTO "user-images" ("url", "description")
+        VALUES ($1, $2)`
+    pool.query(queryText, [req.body.url, req.body.description])
+        .then(() =>{
+            console.log('list post success');
+            res.sendStatus(201);
+        })
+        .catch(err =>{
+            console.log('err in post to list', err);
+            res.sendStatus(500);
+        })
+})
+
+
 module.exports = router;
