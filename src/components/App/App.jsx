@@ -11,7 +11,7 @@ function App() {
   //holds current gallery objects in state
 
   const [imageList, setImageList] = useState([])
-//fetches images on page load
+  //fetches images on page load
   useEffect(() => {
     fetchImages();
   }, [])
@@ -45,7 +45,7 @@ function App() {
 
     axios.delete('/gallery/' + id)
       .then((response) => {
-        
+
 
         fetchImages();
       }).catch((err) => {
@@ -72,7 +72,9 @@ function App() {
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
       <ImageForm addImg={handleNewImage} />
-      <GalleryList images={imageList} handleDelete={handleDelGalleryItem} handleLike={handleLikePut} />
+      <div className='gallery-list'>
+        <GalleryList images={imageList} handleDelete={handleDelGalleryItem} handleLike={handleLikePut} />
+      </div>
     </div>
   );
 }

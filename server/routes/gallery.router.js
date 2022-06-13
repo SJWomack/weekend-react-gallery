@@ -26,7 +26,7 @@ router.put('/like/:id', (req, res) => {
 
 // GET Route handles retrieving images
 router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM "user-images"`
+    const queryText = `SELECT * FROM "user-images" ORDER BY "id"`
     pool.query(queryText)
         .then((results) => {
             console.log('get success')
