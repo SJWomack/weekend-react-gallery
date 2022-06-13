@@ -1,4 +1,7 @@
 import { useState } from 'react'
+
+//collects new image data (url/path, and description)
+//drills back to app.jsx with post package
 function ImageForm({ addImg }) {
     const [inputUrl, setInputUrl] = useState('')
     const [description, setDescription] = useState('')
