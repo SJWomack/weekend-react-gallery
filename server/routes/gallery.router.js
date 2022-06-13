@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
-// PUT Route
+// PUT Route handles likes
 router.put('/like/:id', (req, res) => {
     console.log(req.params, req.body);
     const queryText = `
@@ -24,7 +24,7 @@ router.put('/like/:id', (req, res) => {
         })
 }); // END PUT Route
 
-// GET Route
+// GET Route handles retrieving images
 router.get('/', (req, res) => {
     const queryText = `SELECT * FROM "user-images"`
     pool.query(queryText)
@@ -39,6 +39,7 @@ router.get('/', (req, res) => {
 
 }); // END GET Route
 
+//handles delete request
 router.delete('/:id', (req, res) => {
 
     const sqlQuery = `
@@ -56,6 +57,7 @@ router.delete('/:id', (req, res) => {
         })
 })
 
+//handles new gallery submission
 router.post('/', (req, res)=>{
     if (req.body.url === '' || req.body.description === ''){
         res.send('please input all fields', 501);

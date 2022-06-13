@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+
+//takes in image object, onlike and on del functions
+//appends gallery items to dom and handles clicks
 function GalleryItem({ image, onLike, onDel }) {
     const [description, setDescription] = useState(false)
     function toggleDescription(){

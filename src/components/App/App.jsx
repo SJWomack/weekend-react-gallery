@@ -8,13 +8,15 @@ import axios from 'axios';
 
 
 function App() {
+  //holds current gallery objects in state
 
   const [imageList, setImageList] = useState([])
-
+//fetches images on page load
   useEffect(() => {
     fetchImages();
   }, [])
 
+  //fetches gallery images
   function fetchImages() {
     axios.get('/gallery')
       .then((results) => {
@@ -24,7 +26,7 @@ function App() {
         console.log('Get require failed', err)
       })
   }
-
+  //handles put request for like
   function handleLikePut(id, likes) {
     console.log(id, likes);
     axios.put(`/gallery/like/${id}`, { likes: likes })
@@ -37,6 +39,7 @@ function App() {
       })
   }
 
+  //handles gallery item delete
   function handleDelGalleryItem(id) {
     console.log('in del', id);
 
@@ -50,6 +53,7 @@ function App() {
       })
   }
 
+  //handles post request for new image submission.
   function handleNewImage(newImg) {
     axios.post(`/gallery`, newImg)
       .then((response) => {
