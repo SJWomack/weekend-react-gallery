@@ -19,7 +19,7 @@ function ImageForm({ addImg }) {
     }
 
     return (
-        <form class='image-form'onSubmit={handleSubmit}>
+        <form className='image-form'onSubmit={handleSubmit}>
             <div>
                 <label>Image Source</label>
                 <input
